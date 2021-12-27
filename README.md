@@ -4,7 +4,7 @@ MVP-Clean sample iOS Swift project
 The purpose of this document is to explain the architecture of application.
 
 This application shows restaurants nearby to user's current location.
-It has feature to show those restaurants locations on map. Also, on tap of list row or map annotation, restaurant details are shown.
+It has features to show those restaurants locations in list with pagination and also in map. Also, on tap of list row or map annotation, restaurant details are shown.
 User can start map navigation to restaurant from details screen.
 
 Below are running app screenshots:
