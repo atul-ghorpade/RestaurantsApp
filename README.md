@@ -27,6 +27,7 @@ Below are running app screenshots:
 ## 1. Architecture
 The project is divided into different folder which act as logical units. Each unit has its own responsibility and behaviour. All components communication is done using abstraction. 
 This app divided into below folder structure:
+
 <img width="230" alt="folders" src="https://user-images.githubusercontent.com/4067755/147441925-7cf04a6f-160a-4a94-9bbd-ce46a4b21d3a.png">
 
 
