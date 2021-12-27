@@ -67,7 +67,7 @@ extension RestaurantsListViewController: UITableViewDataSource, UITableViewDeleg
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if tableView.contentOffset.y > (tableView.contentSize.height - tableView.frame.size.height) {
+        if tableView.contentOffset.y >= (tableView.contentSize.height - tableView.frame.size.height) {
             presenter.didScrollBeyondCurrentPage()
         }
     }

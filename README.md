@@ -22,7 +22,7 @@ Below are running app screenshots:
 3. Testing
 4. Project Setup
 5. Notes
-6. Pending Things (// TODOs)
+6. Pending Improvements (// TODOs)
 
 ## 1. Architecture
 The project is divided into different folder which act as logical units. Each unit has its own responsibility and behaviour. All components communication is done using abstraction. 
@@ -93,8 +93,9 @@ To run this project on a local machine follow below steps:
 ## 5. Notes
 * RestarantsParent to List and Map communication is done through Router. To achieve this childViews are added through Router to enable presenter-presenter communication. There are other simple ways availble like parent-child View-View communication but it forces us to pass domain models from parent view to child view.
 
-## 6. Pending Things (// TODOs)
+## 6. Pending Improvements (// TODOs)
 * Improve async image loading in RestaurantTableViewCell. Add implementation to handle cancellation of image downloading. 
 * Improve overall test code coverage.
 * Decouple presenters from LocationManager
+* Create dynamic frameworks for each layer.
 * Create Xcode templates to repeat this code structure easily.
