@@ -10,10 +10,11 @@ User can start map navigation to restaurant from details screen.
 Below are running app screenshots:
 
 
-![list](https://user-images.githubusercontent.com/4067755/147441550-56350119-9215-4e7a-aa5f-78b00f14a45c.png) ![map](https://user-images.githubusercontent.com/4067755/147441623-2f16cf48-31f1-484f-8b76-7403060c2175.png) 
+![list](https://user-images.githubusercontent.com/4067755/147444837-6f961cd4-9077-45d9-ba60-090085718841.png)  ![map](https://user-images.githubusercontent.com/4067755/147444868-539c1157-0a4d-4446-8111-af8700d57c54.png) ![error](https://user-images.githubusercontent.com/4067755/147444893-109909e5-b735-4172-93f5-0ff788236c86.png)
 
-![details](https://user-images.githubusercontent.com/4067755/147441670-ed128ab6-0a11-484c-a4eb-4d91d6e46351.png)  ![navigation](https://user-images.githubusercontent.com/4067755/147441693-5c8025e3-0150-4ac3-a09b-8b0aa56af7a2.png) ![error](https://user-images.githubusercontent.com/4067755/147441711-1bddb22a-07d0-4bd6-acf9-bd79d58f19d4.png)
-![pagination](https://user-images.githubusercontent.com/4067755/147441744-06692383-0209-48b6-906c-2f4940a572b9.gif)
+![details](https://user-images.githubusercontent.com/4067755/147444880-186875ce-1508-4905-b96b-5bb5f26be605.png) ![navigation](https://user-images.githubusercontent.com/4067755/147444889-276b2e80-38ef-4981-8bb4-8e7b22e0a13c.png)
+
+ ![pagination](https://user-images.githubusercontent.com/4067755/147441744-06692383-0209-48b6-906c-2f4940a572b9.gif) 
 
 
 ## Table of Contents
@@ -27,11 +28,14 @@ Below are running app screenshots:
 ## 1. Architecture
 The project is divided into different folder which act as logical units. Each unit has its own responsibility and behaviour. All components communication is done using abstraction. 
 This app divided into below folder structure:
-<img width="115" alt="folders" src="https://user-images.githubusercontent.com/4067755/147441925-7cf04a6f-160a-4a94-9bbd-ce46a4b21d3a.png">
+
+<img width="450" alt="folders" src="https://user-images.githubusercontent.com/4067755/147444936-930e2a7a-a5dd-470e-b814-47e051b17521.png">
 
 
 This diagram will illustrate high level implementation of architecture(3 + 1 architecture)
-<img width="202" alt="architecture" src="https://user-images.githubusercontent.com/4067755/147442126-a0e16c53-571e-42ce-b441-fba50cfaf7b7.png">
+
+<img width="808" alt="architecure" src="https://user-images.githubusercontent.com/4067755/147444968-514b767f-d2fc-4bd2-8b0d-81500ddc5df9.png">
+
 
 ### Presentation:
 Responsible to handle all user events on view.
@@ -61,7 +65,7 @@ It consist below things:
 
 ***Services***: Service layer is for getting the data through data source, in this case it is network.
 
-***Providers***: It handle sthe services and retrieve the data from services and updates domain model about the data.
+***Providers***: It handles the services and retrieve the data from services and updates domain model about the data.
 
 ### App:
 Responsible to manage app level responibilities.
