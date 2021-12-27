@@ -73,13 +73,6 @@
 			remoteGlobalIDString = CA7C4E6527761D5000ACCE0A;
 			remoteInfo = Restaurants;
 		};
-		CA7C4E8727761D5400ACCE0A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CA7C4E5E27761D5000ACCE0A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CA7C4E6527761D5000ACCE0A;
-			remoteInfo = Restaurants;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -113,7 +106,6 @@
 		CA7C4E7527761D5300ACCE0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA7C4E7727761D5300ACCE0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA7C4E7C27761D5400ACCE0A /* RestaurantsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RestaurantsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CA7C4E8627761D5400ACCE0A /* RestaurantsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RestaurantsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA7C4E9F27761EBF00ACCE0A /* AppBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBuilder.swift; sourceTree = "<group>"; };
 		CA7C4EA5277621D500ACCE0A /* BasePresentationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresentationProtocols.swift; sourceTree = "<group>"; };
 		CA7C4EA72776256300ACCE0A /* RestaurantsParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsParentViewController.swift; sourceTree = "<group>"; };
@@ -154,13 +146,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CA7C4E7927761D5400ACCE0A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CA7C4E8327761D5400ACCE0A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -212,7 +197,6 @@
 			children = (
 				CA7C4E6627761D5000ACCE0A /* Restaurants.app */,
 				CA7C4E7C27761D5400ACCE0A /* RestaurantsTests.xctest */,
-				CA7C4E8627761D5400ACCE0A /* RestaurantsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -506,24 +490,6 @@
 			productReference = CA7C4E7C27761D5400ACCE0A /* RestaurantsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		CA7C4E8527761D5400ACCE0A /* RestaurantsUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CA7C4E9627761D5400ACCE0A /* Build configuration list for PBXNativeTarget "RestaurantsUITests" */;
-			buildPhases = (
-				CA7C4E8227761D5400ACCE0A /* Sources */,
-				CA7C4E8327761D5400ACCE0A /* Frameworks */,
-				CA7C4E8427761D5400ACCE0A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CA7C4E8827761D5400ACCE0A /* PBXTargetDependency */,
-			);
-			name = RestaurantsUITests;
-			productName = RestaurantsUITests;
-			productReference = CA7C4E8627761D5400ACCE0A /* RestaurantsUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -538,10 +504,6 @@
 						CreatedOnToolsVersion = 13.1;
 					};
 					CA7C4E7B27761D5400ACCE0A = {
-						CreatedOnToolsVersion = 13.1;
-						TestTargetID = CA7C4E6527761D5000ACCE0A;
-					};
-					CA7C4E8527761D5400ACCE0A = {
 						CreatedOnToolsVersion = 13.1;
 						TestTargetID = CA7C4E6527761D5000ACCE0A;
 					};
@@ -562,7 +524,6 @@
 			targets = (
 				CA7C4E6527761D5000ACCE0A /* Restaurants */,
 				CA7C4E7B27761D5400ACCE0A /* RestaurantsTests */,
-				CA7C4E8527761D5400ACCE0A /* RestaurantsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -588,13 +549,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA92632E2778E877003FF000 /* GetRestaurantsList.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CA7C4E8427761D5400ACCE0A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,13 +616,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CA7C4E8227761D5400ACCE0A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -676,11 +623,6 @@
 			isa = PBXTargetDependency;
 			target = CA7C4E6527761D5000ACCE0A /* Restaurants */;
 			targetProxy = CA7C4E7D27761D5400ACCE0A /* PBXContainerItemProxy */;
-		};
-		CA7C4E8827761D5400ACCE0A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CA7C4E6527761D5000ACCE0A /* Restaurants */;
-			targetProxy = CA7C4E8727761D5400ACCE0A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -918,50 +860,6 @@
 			};
 			name = Release;
 		};
-		CA7C4E9727761D5400ACCE0A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Atul-Ghorpade.RestaurantsUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Restaurants;
-			};
-			name = Debug;
-		};
-		CA7C4E9827761D5400ACCE0A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Atul-Ghorpade.RestaurantsUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Restaurants;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -988,15 +886,6 @@
 			buildConfigurations = (
 				CA7C4E9427761D5400ACCE0A /* Debug */,
 				CA7C4E9527761D5400ACCE0A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CA7C4E9627761D5400ACCE0A /* Build configuration list for PBXNativeTarget "RestaurantsUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CA7C4E9727761D5400ACCE0A /* Debug */,
-				CA7C4E9827761D5400ACCE0A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
