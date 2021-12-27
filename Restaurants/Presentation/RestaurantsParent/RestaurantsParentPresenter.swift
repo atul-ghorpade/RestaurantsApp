@@ -27,7 +27,7 @@ enum SelectedTabType: Int {
 }
 
 final class RestaurantsParentPresenter: NSObject, RestaurantsParentPresenterProtocol {
-    weak var view: RestaurantsParentView?
+    private weak var view: RestaurantsParentView?
 
     private weak var router: RestaurantsParentRouterProtocol!
     private var getRestaurantsUseCase: GetRestaurantsUseCaseProtocol!

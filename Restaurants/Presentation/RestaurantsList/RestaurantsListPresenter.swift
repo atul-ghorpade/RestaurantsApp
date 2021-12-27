@@ -21,8 +21,8 @@ protocol RestaurantsListPresenterDelegate: AnyObject {
 
 final class RestaurantsListPresenter: RestaurantsListPresenterProtocol {
 
-    weak var view: RestaurantsListView?
-    weak var delegate: RestaurantsListPresenterDelegate?
+    private weak var view: RestaurantsListView?
+    private weak var delegate: RestaurantsListPresenterDelegate?
 
     private weak var router: RestaurantsListRouterProtocol!
     private var restaurantsInfoModel: RestaurantsInfoModel?

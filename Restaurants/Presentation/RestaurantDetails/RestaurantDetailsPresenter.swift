@@ -17,7 +17,7 @@ enum RestaurantDetailsViewState: Equatable {
 }
 
 final class RestaurantDetailsPresenter: RestaurantDetailsPresenterProtocol {
-    weak var view: RestaurantDetailsView?
+    private weak var view: RestaurantDetailsView?
 
     private weak var router: RestaurantDetailsRouterProtocol!
     private var restaurantModel: RestaurantModel!

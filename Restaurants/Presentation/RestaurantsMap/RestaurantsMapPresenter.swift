@@ -25,7 +25,7 @@ enum RestaurantsMapViewState: Equatable {
 
 final class RestaurantsMapPresenter: RestaurantsMapPresenterProtocol {
 
-    weak var view: RestaurantsMapView?
+    private weak var view: RestaurantsMapView?
 
     private weak var router: RestaurantsMapRouterProtocol!
     private var restaurantsModels: [RestaurantModel]?
