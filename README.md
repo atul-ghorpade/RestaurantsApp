@@ -27,11 +27,11 @@ Below are running app screenshots:
 ## 1. Architecture
 The project is divided into different folder which act as logical units. Each unit has its own responsibility and behaviour. All components communication is done using abstraction. 
 This app divided into below folder structure:
-<img width="115" alt="folders" src="https://user-images.githubusercontent.com/4067755/147441925-7cf04a6f-160a-4a94-9bbd-ce46a4b21d3a.png">
+<img width="230" alt="folders" src="https://user-images.githubusercontent.com/4067755/147441925-7cf04a6f-160a-4a94-9bbd-ce46a4b21d3a.png">
 
 
 This diagram will illustrate high level implementation of architecture(3 + 1 architecture)
-<img width="202" alt="architecture" src="https://user-images.githubusercontent.com/4067755/147442126-a0e16c53-571e-42ce-b441-fba50cfaf7b7.png">
+<img width="404" alt="architecture" src="https://user-images.githubusercontent.com/4067755/147442126-a0e16c53-571e-42ce-b441-fba50cfaf7b7.png">
 
 ### Presentation:
 Responsible to handle all user events on view.
