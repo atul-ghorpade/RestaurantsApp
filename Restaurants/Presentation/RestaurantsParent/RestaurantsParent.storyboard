@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Restaurants Parent View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="RestaurantsParentViewController" id="Y6W-OH-hqX" customClass="RestaurantsParentViewController" customModule="Restaurants" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aCF-PF-CjM">
+                                <rect key="frame" x="50" y="54" width="314" height="32"/>
+                                <segments>
+                                    <segment title="List"/>
+                                    <segment title="Map"/>
+                                </segments>
+                                <connections>
+                                    <action selector="didSelectSegment:" destination="Y6W-OH-hqX" eventType="valueChanged" id="DEo-Iw-kbp"/>
+                                </connections>
+                            </segmentedControl>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="IBA-LQ-0cE">
+                                <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aCF-PF-CjM" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="8W5-Ag-e8V"/>
+                            <constraint firstItem="IBA-LQ-0cE" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="OQm-32-edv"/>
+                            <constraint firstItem="aCF-PF-CjM" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="YnK-4f-7Pz"/>
+                            <constraint firstItem="aCF-PF-CjM" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="owf-a3-Zdq"/>
+                            <constraint firstItem="IBA-LQ-0cE" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="zHK-0y-K2O"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="IBA-LQ-0cE" id="eq9-p9-3Zk"/>
+                        <outlet property="segmentedControl" destination="aCF-PF-CjM" id="jHp-ns-tRA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18.840579710144929" y="112.5"/>
+        </scene>
+    </scenes>
+</document>

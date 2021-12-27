@@ -1,0 +1,161 @@
+//
+
+import CoreLocation
+import Foundation
+
+protocol RestaurantsParentPresenterProtocol: PresenterProtocol {
+    func didSelectTab(index: Int)
+}
+
+//To be implemented by child presenters
+protocol RestaurantsChildPresenterProtocol {
+    func setRestaurantsInfoModel(_ model: RestaurantsInfoModel?)
+}
+
+enum RestaurantsParentViewState: Equatable {
+    case clear
+    case loading
+    case error(message: String)
+    case render
+
+    struct ViewModel: Equatable {}
+}
+
+enum SelectedTabType: Int {
+    case list
+    case map
+}
+
+final class RestaurantsParentPresenter: NSObject, RestaurantsParentPresenterProtocol {
+    weak var view: RestaurantsParentView?
+
+    private weak var router: RestaurantsParentRouterProtocol!
+    private var getRestaurantsUseCase: GetRestaurantsUseCaseProtocol!
+
+    private var currentSelectedTabType: SelectedTabType = .list
+    private var restaurantsInfoModel: RestaurantsInfoModel?
+    private var locationManager: CLLocationManager!
+    private var currentLocation: LocationModel?
+
+    private var viewState: RestaurantsParentViewState = .clear {
+        didSet {
+            guard oldValue != viewState else {
+                return
+            }
+            view?.changeViewState(viewState: viewState)
+        }
+    }
+
+    init(view: RestaurantsParentView?,
+         getRestaurantsUseCase: GetRestaurantsUseCaseProtocol,
+         router: RestaurantsParentRouterProtocol) {
+        self.view = view
+        self.getRestaurantsUseCase = getRestaurantsUseCase
+        self.router = router
+    }
+
+    func viewLoaded() {
+        setupLocation()
+    }
+
+    private func setupLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
+    }
+
+    private func getRestaurants() {
+        guard let currentLocation = currentLocation else {
+            return
+        }
+        viewState = .loading
+        let params = GetRestaurantsParams(location: currentLocation,
+                                          nextPageInfo: restaurantsInfoModel?.nextPageInfo) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            switch result {
+            case .success(let receivedRestaurantsInfoModel):
+                let totalRestaurantsModels = (self.restaurantsInfoModel?.restaurantsModels ?? []) +  receivedRestaurantsInfoModel.restaurantsModels
+                self.restaurantsInfoModel = RestaurantsInfoModel(restaurantsModels: totalRestaurantsModels,
+                                                            nextPageInfo: receivedRestaurantsInfoModel.nextPageInfo)
+                switch self.currentSelectedTabType {
+                case .list:
+                    self.router.showRestaurantsList(model: self.restaurantsInfoModel,
+                                                    delegate: self)
+                case .map:
+                    self.router.showRestaurantsMap(userLocation: currentLocation,
+                                                   model: self.restaurantsInfoModel)
+                }
+                self.viewState = .render
+            case .failure:
+                self.viewState = .error(message: "Unable to get restaurants list, please try after some time")
+            }
+        }
+        getRestaurantsUseCase.run(params)
+    }
+
+    func didSelectTab(index: Int) {
+        guard index != currentSelectedTabType.rawValue,
+              let selectedTabType = SelectedTabType(rawValue: index),
+              let currentLocation = currentLocation else {
+            return
+        }
+        currentSelectedTabType = selectedTabType
+        switch currentSelectedTabType {
+        case .list:
+            router.showRestaurantsList(model: self.restaurantsInfoModel,
+                                       delegate: self)
+        case .map:
+            router.showRestaurantsMap(userLocation: currentLocation,
+                                      model: self.restaurantsInfoModel)
+        }
+    }
+}
+
+extension RestaurantsParentPresenter: RestaurantsListPresenterDelegate {
+    func handleNextPageRequest() {
+        getRestaurants()
+    }
+}
+
+extension RestaurantsParentPresenter: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if CLLocationManager.locationServicesEnabled() {
+            switch manager.authorizationStatus {
+            case .notDetermined:
+                locationManager.requestAlwaysAuthorization()
+            case .restricted, .denied:
+                viewState = .error(message: "Cannot access location, please authorize the app to access location.")
+            case .authorizedAlways, .authorizedWhenInUse:
+                locationManager.startUpdatingLocation()
+            @unknown default:
+                break
+            }
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager,
+                         didUpdateLocations locations: [CLLocation]) {
+        guard let currentLocationCoordinates = manager.location?.coordinate else {
+            return
+        }
+        self.currentLocation = LocationModel(coordinates: currentLocationCoordinates)
+        getRestaurants()
+    }
+}
+
+extension LocationModel {
+    init(coordinates: CLLocationCoordinate2D) {
+        self.longitude = coordinates.longitude
+        self.latitude = coordinates.latitude
+    }
+}
