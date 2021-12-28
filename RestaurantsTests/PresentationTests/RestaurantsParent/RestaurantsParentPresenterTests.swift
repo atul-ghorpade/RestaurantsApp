@@ -65,7 +65,23 @@ class RestaurantsParentPresenterTests: XCTestCase {
         XCTAssertEqual(routerMock.model, restaurantInfoModel)
     }
 
-    func testGetRestaurantsFailure() {
+    func testRestaurantsFailureMessageForNoAccessError() {
+        // Given
+        let useCaseError = UseCaseError.noAccess
+        getRestaurantsUseCaseMock.result = .failure(useCaseError)
+
+        let locationManagerMock = LocationManagerMock()
+        locationManagerMock.mockLocation = CLLocation(latitude: 0.4, longitude: 0.4)
+
+        // When
+        presenter.locationManager(locationManagerMock, didUpdateLocations: [CLLocation(latitude: 0, longitude: 0)])
+
+        // Then
+        XCTAssertEqual(viewMock.viewState,
+                       .error(message: "This app does not have access to show nearby restaurants currently. Access Denied!"))
+    }
+
+    func testRestaurantsFailureForGenericError() {
         // Given
         let error = NSError(domain: NSURLErrorDomain, code: 0, userInfo: nil)
         let useCaseError = UseCaseError.underlying(error)
@@ -79,7 +95,7 @@ class RestaurantsParentPresenterTests: XCTestCase {
 
         // Then
         XCTAssertEqual(viewMock.viewState,
-                       .error(message: "Unable to get restaurants list, please try after some time"))
+                       .error(message: "Unable to get restaurants list, please retry."))
     }
 
     func testGetLocationFailure() {

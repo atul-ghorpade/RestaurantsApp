@@ -1,6 +1,8 @@
 enum UseCaseError: Error {
     case mapping(Swift.Error)
     case underlying(Swift.Error)
+    case noAccess
+    case generic
     case network(NetworkError)
 }
 

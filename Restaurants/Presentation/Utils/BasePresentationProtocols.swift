@@ -54,9 +54,13 @@ extension PresenterProtocol {
 protocol Alertable {}
 
 extension Alertable where Self: UIViewController {
-    func showAlert(title: String = "", message: String, preferredStyle: UIAlertController.Style = .alert, completion: (() -> Void)? = nil) {
+    func showAlert(title: String = "",
+                   actionTitle: String,
+                   message: String,
+                   preferredStyle: UIAlertController.Style = .alert,
+                   actionHandler: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: completion)
+        alert.addAction(UIAlertAction(title: actionTitle, style: UIAlertAction.Style.default, handler: actionHandler))
+        self.present(alert, animated: true, completion: nil)
     }
 }

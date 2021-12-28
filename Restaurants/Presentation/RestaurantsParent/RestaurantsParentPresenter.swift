@@ -5,6 +5,7 @@ import Foundation
 
 protocol RestaurantsParentPresenterProtocol: PresenterProtocol {
     func didSelectTab(index: Int)
+    func didTapRetryOption()
 }
 
 //To be implemented by child presenters
@@ -94,8 +95,14 @@ final class RestaurantsParentPresenter: NSObject, RestaurantsParentPresenterProt
                                                             nextPageInfo: receivedRestaurantsInfoModel.nextPageInfo)
                 self.updateRestaurantsListForCurrentChild()
                 self.viewState = .render
-            case .failure:
-                self.viewState = .error(message: "Unable to get restaurants list, please try after some time")
+            case .failure(let useCaseError):
+                var errorMessage: String
+                if case .noAccess = useCaseError {
+                    errorMessage = "This app does not have access to show nearby restaurants currently. Access Denied!"
+                } else {
+                    errorMessage = "Unable to get restaurants list, please retry."
+                }
+                self.viewState = .error(message: errorMessage)
             }
         }
         getRestaurantsUseCase.run(params)
@@ -108,6 +115,10 @@ final class RestaurantsParentPresenter: NSObject, RestaurantsParentPresenterProt
         }
         currentSelectedTabType = selectedTabType
         updateRestaurantsListForCurrentChild()
+    }
+    
+    func didTapRetryOption() {
+        getRestaurants()
     }
     
     private func updateRestaurantsListForCurrentChild() {

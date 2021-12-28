@@ -1,14 +1,12 @@
-//
-
-import Foundation
-
-struct RestaurantsInfoResponseEntity: Decodable {
+struct RestaurantsInfoResponseEntity: DecodableParentEntityProtocol {
     let restaurants: [RestaurantEntity]
     let nextPageInfo: String?
+    let status: Status?
 
     enum CodingKeys: String, CodingKey {
         case restaurants = "results"
         case nextPageInfo = "next_page_token"
+        case status = "status"
     }
 
     func toDomain() throws -> RestaurantsInfoModel {

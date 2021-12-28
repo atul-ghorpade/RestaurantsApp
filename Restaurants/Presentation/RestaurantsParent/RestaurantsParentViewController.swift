@@ -44,7 +44,9 @@ final class RestaurantsParentViewController: UIViewController, RestaurantsParent
         case .error(let message):
             activityIndicator.isHidden = true
             segmentedControl.isUserInteractionEnabled = true
-            showAlert(title: "Error", message: message)
+            showAlert(title: "Error", actionTitle: "Retry", message: message) { [weak self] _ in
+                self?.presenter.didTapRetryOption()
+            }
         }
     }
 
