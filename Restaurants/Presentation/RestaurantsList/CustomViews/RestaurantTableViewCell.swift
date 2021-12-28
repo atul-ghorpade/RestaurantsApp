@@ -2,7 +2,7 @@
 
 import UIKit
 
-struct RestaurantCellViewModel: CellViewModel {
+struct RestaurantCellViewModel: CellViewModel, Equatable {
     let imageURL: URL?
     let name: String
     let status: String?

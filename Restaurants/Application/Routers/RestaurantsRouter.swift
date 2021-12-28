@@ -54,7 +54,8 @@ extension RestaurantsRouter: RestaurantsParentRouterProtocol {
                 $0.removeChildFromParent()
             }
             restaurantsParentViewController?.add(restaurantsListViewController)
-            ((restaurantsListViewController as? RestaurantsListView)?.presenter as? RestaurantsChildPresenterProtocol)?.setRestaurantsInfoModel(model)
+            let listChildPresenter = ((restaurantsListViewController as? RestaurantsListView)?.presenter as? RestaurantsListChildPresenterProtocol)
+            listChildPresenter?.setRestaurantsInfoModel(model)
         }
     }
     
@@ -71,7 +72,9 @@ extension RestaurantsRouter: RestaurantsParentRouterProtocol {
                 $0.removeChildFromParent()
             }
             restaurantsParentViewController?.add(restaurantsMapViewController)
-            ((restaurantsMapViewController as? RestaurantsMapView)?.presenter as? RestaurantsChildPresenterProtocol)?.setRestaurantsInfoModel(model)
+            let mapsChildPresenter = ((restaurantsMapViewController as? RestaurantsMapView)?.presenter as? RestaurantsMapChildPresenterProtocol)
+            mapsChildPresenter?.setRestaurantsInfoModel(model,
+                                                        userLocation: userLocation)
         }
     }
 }

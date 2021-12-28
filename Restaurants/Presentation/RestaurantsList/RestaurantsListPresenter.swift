@@ -10,9 +10,11 @@ protocol RestaurantsListPresenterProtocol: PresenterProtocol, TableViewDataSourc
 enum RestaurantsListViewState: Equatable {
     case clear
     case loading
-    case render
+    case render(viewModel: ViewModel)
 
-    struct ViewModel: Equatable {} // Handled through table view data source protocol - TableViewDataSource
+    struct ViewModel: Equatable {
+        let rowsViewModels: [RestaurantCellViewModel]
+    }
 }
 
 protocol RestaurantsListPresenterDelegate: AnyObject {
@@ -62,7 +64,7 @@ final class RestaurantsListPresenter: RestaurantsListPresenterProtocol {
         delegate?.handleNextPageRequest()
     }
 
-    private func getViewModel(restaurantModel: RestaurantModel) -> RestaurantCellViewModel {
+    private func getCellViewModel(restaurantModel: RestaurantModel) -> RestaurantCellViewModel {
         var statusString: String?
         if let status = restaurantModel.openStatus {
             statusString = status ? "Open" : "Closed"
@@ -91,14 +93,18 @@ extension RestaurantsListPresenter: TableViewDataSource {
         guard let restaurantModel = restaurantsInfoModel?.restaurantsModels[indexPath.row] else {
             return nil
         }
-        let cellViewModel = getViewModel(restaurantModel: restaurantModel)
+        let cellViewModel = getCellViewModel(restaurantModel: restaurantModel)
         return cellViewModel
     }
 }
 
-extension RestaurantsListPresenter: RestaurantsChildPresenterProtocol {
+extension RestaurantsListPresenter: RestaurantsListChildPresenterProtocol {
     func setRestaurantsInfoModel(_ model: RestaurantsInfoModel?) {
         restaurantsInfoModel = model
-        viewState = .render
+        let rowsViewModels = (restaurantsInfoModel?.restaurantsModels ?? []).map {
+            getCellViewModel(restaurantModel: $0)
+        }
+        let screenViewModel = RestaurantsListViewState.ViewModel(rowsViewModels: rowsViewModels)
+        viewState = .render(viewModel: screenViewModel)
     }
 }

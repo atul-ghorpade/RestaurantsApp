@@ -43,8 +43,8 @@ final class RestaurantsMapViewController: UIViewController, RestaurantsMapView {
             RestaurantAnnotation(title: $0.title, coordinate: $0.location, subtitle: $0.subtitle)
         }
         mapView.addAnnotations(annotations)
-        let span = MKCoordinateSpan(latitudeDelta: 0.01,
-                                    longitudeDelta: 0.01)
+        let span = MKCoordinateSpan(latitudeDelta: viewModel.latitudeDelta,
+                                    longitudeDelta: viewModel.longitudeDelta)
         let region = MKCoordinateRegion(center: viewModel.userLocation, span: span)
         mapView.setRegion(region, animated: true)
     }

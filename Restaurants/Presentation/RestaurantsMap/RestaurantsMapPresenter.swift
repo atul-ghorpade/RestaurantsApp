@@ -14,6 +14,8 @@ enum RestaurantsMapViewState: Equatable {
     struct ViewModel: Equatable {
         let userLocation: CLLocationCoordinate2D
         let restaurantsLocations: [LocationViewModel]
+        let latitudeDelta: CLLocationDegrees
+        let longitudeDelta: CLLocationDegrees
     }
 
     struct LocationViewModel: Equatable {
@@ -30,6 +32,8 @@ final class RestaurantsMapPresenter: RestaurantsMapPresenterProtocol {
     private weak var router: RestaurantsMapRouterProtocol!
     private var restaurantsModels: [RestaurantModel]?
     private var userLocation: LocationModel
+    private let latitudeDelta: CLLocationDegrees = 0.01
+    private let longitudeDelta: CLLocationDegrees = 0.01
 
     private var viewState: RestaurantsMapViewState = .clear {
         didSet {
@@ -87,14 +91,18 @@ final class RestaurantsMapPresenter: RestaurantsMapPresenterProtocol {
         }
 
         let viewModel = RestaurantsMapViewState.ViewModel(userLocation: userLocationCoordinates,
-                                                          restaurantsLocations: restaurantLocationsViewModels ?? [])
+                                                          restaurantsLocations: restaurantLocationsViewModels ?? [],
+                                                          latitudeDelta: self.latitudeDelta,
+                                                          longitudeDelta: self.longitudeDelta)
         viewState = .render(viewModel: viewModel)
     }
 }
 
-extension RestaurantsMapPresenter: RestaurantsChildPresenterProtocol {
-    func setRestaurantsInfoModel(_ model: RestaurantsInfoModel?) {
+extension RestaurantsMapPresenter: RestaurantsMapChildPresenterProtocol {
+    func setRestaurantsInfoModel(_ model: RestaurantsInfoModel?,
+                                 userLocation: LocationModel) {
         self.restaurantsModels = model?.restaurantsModels ?? []
+        self.userLocation = userLocation
         calculateViewState()
     }
 }

@@ -36,7 +36,11 @@ class RestaurantsListPresenterTests: XCTestCase {
         presenter.setRestaurantsInfoModel(restaurantInfoModel)
 
         // Then
-        XCTAssertEqual(viewMock.viewState, .render)
+        guard case .render(let viewModel) = viewMock.viewState else {
+            return XCTFail("state is not correct")
+        }
+        XCTAssertEqual(viewModel.rowsViewModels.first?.name,
+                       "Restaurant Sample Name")
     }
 
     func testNumberOfRowsInSection() {

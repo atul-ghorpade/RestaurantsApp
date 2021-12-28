@@ -8,8 +8,13 @@ protocol RestaurantsParentPresenterProtocol: PresenterProtocol {
 }
 
 //To be implemented by child presenters
-protocol RestaurantsChildPresenterProtocol {
+protocol RestaurantsListChildPresenterProtocol {
     func setRestaurantsInfoModel(_ model: RestaurantsInfoModel?)
+}
+
+protocol RestaurantsMapChildPresenterProtocol {
+    func setRestaurantsInfoModel(_ model: RestaurantsInfoModel?,
+                                 userLocation: LocationModel)
 }
 
 enum RestaurantsParentViewState: Equatable {
@@ -61,6 +66,8 @@ final class RestaurantsParentPresenter: NSObject, RestaurantsParentPresenterProt
     private func setupLocation() {
         locationManager = CLLocationManager()
         locationManager.delegate = self
+        let minDistanceChangeToUpdateRestaurantsList = 100.0
+        locationManager.distanceFilter = minDistanceChangeToUpdateRestaurantsList
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
@@ -85,14 +92,7 @@ final class RestaurantsParentPresenter: NSObject, RestaurantsParentPresenterProt
                 let totalRestaurantsModels = (self.restaurantsInfoModel?.restaurantsModels ?? []) +  receivedRestaurantsInfoModel.restaurantsModels
                 self.restaurantsInfoModel = RestaurantsInfoModel(restaurantsModels: totalRestaurantsModels,
                                                             nextPageInfo: receivedRestaurantsInfoModel.nextPageInfo)
-                switch self.currentSelectedTabType {
-                case .list:
-                    self.router.showRestaurantsList(model: self.restaurantsInfoModel,
-                                                    delegate: self)
-                case .map:
-                    self.router.showRestaurantsMap(userLocation: currentLocation,
-                                                   model: self.restaurantsInfoModel)
-                }
+                self.updateRestaurantsListForCurrentChild()
                 self.viewState = .render
             case .failure:
                 self.viewState = .error(message: "Unable to get restaurants list, please try after some time")
@@ -103,11 +103,17 @@ final class RestaurantsParentPresenter: NSObject, RestaurantsParentPresenterProt
 
     func didSelectTab(index: Int) {
         guard index != currentSelectedTabType.rawValue,
-              let selectedTabType = SelectedTabType(rawValue: index),
-              let currentLocation = currentLocation else {
+              let selectedTabType = SelectedTabType(rawValue: index) else {
             return
         }
         currentSelectedTabType = selectedTabType
+        updateRestaurantsListForCurrentChild()
+    }
+    
+    private func updateRestaurantsListForCurrentChild() {
+        guard let currentLocation = currentLocation else {
+            return
+        }
         switch currentSelectedTabType {
         case .list:
             router.showRestaurantsList(model: self.restaurantsInfoModel,
@@ -149,6 +155,8 @@ extension RestaurantsParentPresenter: CLLocationManagerDelegate {
             return
         }
         self.currentLocation = LocationModel(coordinates: currentLocationCoordinates)
+        self.restaurantsInfoModel = nil
+        updateRestaurantsListForCurrentChild()
         getRestaurants()
     }
 }
